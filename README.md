@@ -1,3 +1,2 @@
 # DoodleJump
-Brown University CS15\n
-Just like the classic!
+Just like the classic! (Brown University CS15)
