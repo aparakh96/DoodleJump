@@ -36,11 +36,11 @@ public class Platform {
 	private void setUpPlatforms() {
 		int platformInt = (int) (Math.random() * 20);
 		_platformType = null;
-		Image normalPlatform = new Image("normalplatform.png");
-		Image springPlatform = new Image("springplatform.png");
-		Image trampPlatform = new Image("trampplatform.png");
-		Image shakyPlatform = new Image("shakyplatform.png");
-		Image crackedPlatform = new Image("crackedplatform.png");
+		Image normalPlatform = new Image("Images/normalplatform.png");
+		Image springPlatform = new Image("Images/springplatform.png");
+		Image trampPlatform = new Image("Images/trampplatform.png");
+		Image shakyPlatform = new Image("Images/shakyplatform.png");
+		Image crackedPlatform = new Image("Images/crackedplatform.png");
 		switch (platformInt) {
 		case 0:
 		case 1:

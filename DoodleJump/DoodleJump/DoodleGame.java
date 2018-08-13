@@ -37,6 +37,7 @@ public class DoodleGame {
 	private String _blackHoleContact;
 
 	private ImageView _rocketViewer;
+	private ImageView _thrustViewer;
 	private String _rocketStatus;
 	private FadeTransition _fadeThrust;
 
@@ -84,6 +85,20 @@ public class DoodleGame {
 		_myPlatforms.add(_topMostPlatform);
 		_counter = 0;
 		_playStatus = "PLAYING";
+		
+		_thrustViewer = new ImageView(new Image("Images/thrust.png"));
+		_thrustViewer.setOpacity(1.0);
+		_thrustViewer.setFitWidth(50);
+		_thrustViewer.setRotate(180);
+		_thrustViewer.setPreserveRatio(true);
+		_thrustViewer.setCache(true);
+		_thrustViewer.setSmooth(true);
+		
+		_fadeThrust = new FadeTransition(Duration.seconds(9.5), _thrustViewer);
+		_fadeThrust.setFromValue(1.0);
+		_fadeThrust.setToValue(0.0);
+		_fadeThrust.setOnFinished(new RemoveThrustHandler());
+		
 		this.generatePlatforms();
 		this.setUpTimelines();
 	}
@@ -390,28 +405,14 @@ public class DoodleGame {
 						_launchStatus = "TRUE";
 						_velocity = Constants.REBOUND_VELOCITY * Constants.ROCKET_VELOCITY_FACTOR;
 						_root.getChildren().remove(_rocketViewer);
-						Image thrust = new Image("thrust.png");
-						ImageView thrustViewer = new ImageView(thrust);
-						thrustViewer.setOpacity(1.0);
-						thrustViewer.setFitWidth(50);
-						thrustViewer.setRotate(180);
-						thrustViewer.setPreserveRatio(true);
-						thrustViewer.setCache(true);
-						thrustViewer.setSmooth(true);
-						thrustViewer
-								.setLayoutY(Constants.SCENE_HEIGHT / 2 + 31);
-						thrustViewer.setLayoutX(_doodle.getDoodleViewer()
-								.getLayoutX());
-						_root.getChildren().add(thrustViewer);
+						_thrustViewer.setLayoutY(Constants.SCENE_HEIGHT / 2 + 31);
+						_thrustViewer.setLayoutX(_doodle.getDoodleViewer().getLayoutX());
+						_root.getChildren().add(_thrustViewer);
 						_rocketStatus = "REMOVED";
 						_playStatus = "PAUSED";
-						_fadeThrust = new FadeTransition(Duration.seconds(9.5),
-								thrustViewer);
-						_fadeThrust.setFromValue(1.0);
-						_fadeThrust.setToValue(0.0);
 						_fadeThrust.play();
 						_scoreCounter.setTextFill(Color.WHITE);
-						Image space = new Image("space.jpg");
+						Image space = new Image("Images/space.jpg");
 						_organizer.getBackgroundViewer().setImage(space);
 						_organizer.getBackgroundViewer().setFitWidth(
 								Constants.SCENE_WIDTH + 100);
@@ -477,7 +478,7 @@ public class DoodleGame {
 		platform position to ensure the two don't overlap.
 		*/
 		private void addBlackHole() {
-			Image blackHole = new Image("blackhole.png");
+			Image blackHole = new Image("Images/blackhole.png");
 			_blackHoleViewer = new ImageView(blackHole);
 			_blackHoleViewer.setFitWidth(Constants.BLACK_HOLE_WIDTH);
 			_blackHoleViewer.setPreserveRatio(true);
@@ -498,7 +499,7 @@ public class DoodleGame {
 		platform position to ensure the two don't overlap.
 		*/
 		private void addRocket() {
-			Image rocket = new Image("rocket.png");
+			Image rocket = new Image("Images/rocket.png");
 			_rocketViewer = new ImageView(rocket);
 			_rocketViewer.setFitWidth(Constants.ROCKET_WIDTH);
 			_rocketViewer.setPreserveRatio(true);
@@ -538,19 +539,19 @@ public class DoodleGame {
 			//combine to select the proper image.
 			Image[][] monsterImages = new Image[2][6];
 			//"Left" images
-			monsterImages[0][0] = new Image("fangsL.png");
-			monsterImages[0][1] = new Image("grouperL.png");
-			monsterImages[0][2] = new Image("ninjaL.png");
-			monsterImages[0][3] = new Image("santaL.png");
-			monsterImages[0][4] = new Image("squidL.png");
-			monsterImages[0][5] = new Image("zombieL.png");
+			monsterImages[0][0] = new Image("Images/fangsL.png");
+			monsterImages[0][1] = new Image("Images/grouperL.png");
+			monsterImages[0][2] = new Image("Images/ninjaL.png");
+			monsterImages[0][3] = new Image("Images/santaL.png");
+			monsterImages[0][4] = new Image("Images/squidL.png");
+			monsterImages[0][5] = new Image("Images/zombieL.png");
 			//"Right" images
-			monsterImages[1][0] = new Image("fangsR.png");
-			monsterImages[1][1] = new Image("grouperR.png");
-			monsterImages[1][2] = new Image("ninjaR.png");
-			monsterImages[1][3] = new Image("santaR.png");
-			monsterImages[1][4] = new Image("squidR.png");
-			monsterImages[1][5] = new Image("zombieR.png");
+			monsterImages[1][0] = new Image("Images/fangsR.png");
+			monsterImages[1][1] = new Image("Images/grouperR.png");
+			monsterImages[1][2] = new Image("Images/ninjaR.png");
+			monsterImages[1][3] = new Image("Images/santaR.png");
+			monsterImages[1][4] = new Image("Images/squidR.png");
+			monsterImages[1][5] = new Image("Images/zombieR.png");
 			String movingDirection = null;
 			int directionInt = 0;
 			//Ensures initial movement covers larger half of the screen (if monster's on the right, move left, converse true)
@@ -697,7 +698,7 @@ public class DoodleGame {
 			//Move left
 			if (keyPressed == KeyCode.LEFT) {
 				if (_playStatus == "PLAYING") {
-					Image doodleL = new Image("doodleL.png");
+					Image doodleL = new Image("Images/doodleL.png");
 					_doodle.getDoodleViewer().setImage(doodleL);
 					_lateralTimeline.stop();
 					_lateralTimeline.getKeyFrames().clear();
@@ -707,7 +708,7 @@ public class DoodleGame {
 			//Move right
 			} else if (keyPressed == KeyCode.RIGHT) {
 				if (_playStatus == "PLAYING") {
-					Image doodleR = new Image("doodleR.png");
+					Image doodleR = new Image("Images/doodleR.png");
 					_doodle.getDoodleViewer().setImage(doodleR);
 					_lateralTimeline.stop();
 					_lateralTimeline.getKeyFrames().clear();
@@ -743,7 +744,7 @@ public class DoodleGame {
 		as well as the fade transitions that run each time the up or down keys are pressed.
 		*/
 		private void setUpPauseAndPlay() {
-			Image paused = new Image("paused.png");
+			Image paused = new Image("Images/paused.png");
 			ImageView pauseViewer = new ImageView(paused);
 			pauseViewer.setSmooth(true);
 			pauseViewer.setCache(true);
@@ -756,7 +757,7 @@ public class DoodleGame {
 			_pausePane.getChildren().add(pauseViewer);
 			_pausePane.setVisible(false);
 			_root.getChildren().add(_pausePane);
-			Image play = new Image("play.png");
+			Image play = new Image("Images/play.png");
 
 			ImageView playViewer = new ImageView(play);
 			playViewer.setSmooth(true);
@@ -798,6 +799,15 @@ public class DoodleGame {
 			}
 			event.consume();
 		}
+	}
+	
+	private class RemoveThrustHandler implements EventHandler<ActionEvent> {
+		
+		@Override
+		public void handle(ActionEvent event) {
+			_root.getChildren().remove(_thrustViewer);
+		}
+	
 	}
 
 	/**

@@ -19,6 +19,7 @@ public class App extends Application {
 				Constants.SCENE_HEIGHT);
 		stage.setScene(scene);
 		stage.setTitle("Doodle Jump");
+		stage.setResizable(false);
 		stage.show();
 	}
 

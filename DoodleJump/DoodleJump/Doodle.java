@@ -29,7 +29,7 @@ public class Doodle {
 	in the doodle class, provides initialization layout and formatting.
 	*/
 	private void setUpDoodle() {
-		_doodleIcon = new Image("doodleL.png");
+		_doodleIcon = new Image("Images/doodleL.png");
 		_doodleIconViewer = new ImageView(_doodleIcon);
 		_doodleIconViewer.setFitWidth(Constants.CLASSIC_DOODLE_DIM);
 		_doodleIconViewer.setPreserveRatio(true);

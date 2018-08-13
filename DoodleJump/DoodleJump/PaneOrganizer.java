@@ -76,8 +76,7 @@ public class PaneOrganizer {
 	*/
 	private void setUpQuitButton() {
 		//RENDERS THE RED X TO BE ADDED TO QUIT BUTTON
-		Image quitX = new Image("redx.png");
-		ImageView quitViewer = new ImageView(quitX);
+		ImageView quitViewer = new ImageView(new Image("Images/redx.png"));
 		quitViewer.setFitWidth(20);
 		quitViewer.setPreserveRatio(true);
 		quitViewer.setSmooth(true);
@@ -153,7 +152,7 @@ public class PaneOrganizer {
 	A helper method used to load and render the graph paper background image scene in the game.
 	*/
 	private void setUpBackgroundImage() {
-		_background = new Image("graphpaper.jpeg");
+		_background = new Image("Images/graphpaper.jpeg");
 		_backgroundViewer = new ImageView(_background);
 		_backgroundViewer.setFitWidth(Constants.SCENE_WIDTH + 52);
 		_backgroundViewer.setPreserveRatio(true);
@@ -166,7 +165,7 @@ public class PaneOrganizer {
 	}
 
 	private void setUpKeys() {
-		_keys = new ImageView(new Image("kb.png"));
+		_keys = new ImageView(new Image("Images/kb.png"));
 		_keys.setFitWidth(200);
 		_keys.setLayoutX(Constants.SCENE_WIDTH / 2 - 100);
 		_keys.setLayoutY(Constants.SCENE_HEIGHT / 2 + 120);
