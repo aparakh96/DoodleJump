@@ -1,0 +1,47 @@
+README DoodleJump;
+
+HANDIN: This is my final handin. I don't intend to resubmit at a later date.
+
+DESIGN CHOICES:
+
+*** GRAPHICAL/GAME LOGIC: PaneOrganizer, DoodleGame
+
+PaneOrganizer: Sets up much of the graphics within the program, including the macro-control EventHandlers such as those
+dealing with quit, reset and start functionality. Primarily initializes and formats buttons and labels.
+
+DoodleGame: The primary game logic class, Doodle Game contains the doodle and platform classes (at least their
+instances). Among other corollary functions, it primarily establishes the timelines controlling the vertical and
+horizontal motion of the game elements, generates platforms, rockets, monsters and black holes in a semi-random manner,
+scrolls the screen and, critically, updates the doodle's position while simultaneously checking for contact with all
+of the other elements added, and then responding accordingly.
+
+*** GENERATORS: Doodle, Platform
+
+Doodle: Rather than a shape, models a doodle using an Image and an ImageView - provides a host of setters and getters
+to facilitate motion in the DoodleGame class.
+
+Platform: Rather than a shape*, models a platform using a series of Images and an ImageView - provides a host of setters
+and getters to facilitate motion in the DoodleGame class. Unlike its doodle counterpart, the platform image is
+randomly generated (from within a set range of images) at which point the platform is assigned a string "tag" that
+allows the DoodleGame instance to reference its type and manipulate the doodle's response accordingly.
+
+*I did begin with rectangular (javafx Rectangle) platforms, but after I was able to achieve MF with them, I switched to
+the ImageViews.
+
+*** AUXILIARY: App, Constants
+
+App: Simply the uppermost class in the entire application - instantiates the top-level class PaneOrganizer upon
+startup and, as always, goes on to initialize the program and execute the code. Somewhat differently, passes itself
+and its stage to PaneOrganizer to allow an ActionEvent EventHandler to call its start method on a click, enabling reset
+functionality.
+
+Constants: Constants used throughout the program, primarily used to define default
+layouts, manipulate the rebound velocity, and dictate frequency with which non-platform elements should be
+added to the game.
+
+KNOWN BUGS: If anything, at times the final text label at the end of game screen will remain black instead
+turning red. Also, if the user presses pause at the outset (during the fade delay) but doesn't press play, even when
+the timeline launches on its own, he/she will lose key input functionality until they press play, as pause is coded
+to disconnect the keyhandlers. Both these issues seem to be fringe cases, and shouldn't likely interfere with the game.
+
+Understandably, given all the random assignment, the app can be a little laggy when generating a monster or black hole.
